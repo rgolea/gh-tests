@@ -26,8 +26,12 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline
 
 
+
+      - name: Deployable
+        run: echo "DEPLOYABLE_PACKAGES=$(ls ./examples -p | grep -v / | tr '\n' ',')" >> $GITHUB_ENV
+
       - name: Deploy
-        run: yarn nx run-many --target=deploy --all --exclude="$(ls ./examples -p | grep -v / | tr '\n' ',')" --dry-run
+        run: yarn nx run-many --target=deploy --all --exclude=$DEPLOYABLE_PACKAGES --dry-run
 
 # jobs:
 #   release:
