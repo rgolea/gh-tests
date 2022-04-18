@@ -23,7 +23,7 @@ jobs:
           node-version: "16.x"
           cache: 'yarn'
       - name: Deployable
-        run: echo "DEPLOYABLE_PACKAGES=$(ls ./examples -p | grep -v / | tr '\n' ',')" >> $GITHUB_ENV
+        run: echo "DEPLOYABLE_PACKAGES=$(ls ./examples | tr '\n' ',')" >> $GITHUB_ENV
 
       - name: Echo deployable
         run: echo $DEPLOYABLE_PACKAGES
