@@ -22,13 +22,19 @@ jobs:
         with:
           node-version: "16.x"
           cache: 'yarn'
+      - name: Deployable
+        run: echo "DEPLOYABLE_PACKAGES=$(ls ./examples -p | grep -v / | tr '\n' ',')" >> $GITHUB_ENV
+
+      - name: Echo deployable
+        run: echo $DEPLOYABLE_PACKAGES
+        env:
+          DEPLOYABLE_PACKAGES: ${{ env.DEPLOYABLE_PACKAGES }}
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
 
 
 
-      - name: Deployable
-        run: echo "DEPLOYABLE_PACKAGES=$(ls ./examples -p | grep -v / | tr '\n' ',')" >> $GITHUB_ENV
 
       - name: Deploy
         run: yarn nx run-many --target=deploy --all --exclude=$DEPLOYABLE_PACKAGES --dry-run
