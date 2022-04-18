@@ -32,6 +32,8 @@ jobs:
 
       - name: Deploy
         run: yarn nx run-many --target=deploy --all --exclude=$DEPLOYABLE_PACKAGES --dry-run
+        env:
+          DEPLOYABLE_PACKAGES: ${{ env.DEPLOYABLE_PACKAGES }}
 
 # jobs:
 #   release:
