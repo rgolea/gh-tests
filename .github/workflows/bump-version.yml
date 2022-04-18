@@ -20,12 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16.x"
-          cache: 'npm'
+          cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
 
       - name: Files verification
-        run: ls -p ./examples | grep -v / | tr '\n' ','
+        run: echo "$(ls -p ./examples | grep -v / | tr '\n' ',')"
 
       - name: Deploy
         run: yarn nx run-many --target=deploy --all --exclude=$(ls -p ./examples | grep -v / | tr '\n' ',') --dry-run
