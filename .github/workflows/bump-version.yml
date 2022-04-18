@@ -18,7 +18,7 @@ jobs:
           git config user.email "gituser@example.com"
 
       - name: Files verification
-        run: echo (ls ./examples -p | grep -v / | tr '\n' ',')
+        run: echo "$(ls ./examples -p | grep -v / | tr '\n' ',')"
 
       # - name: Setup Node.js
       #   uses: actions/setup-node@v3
