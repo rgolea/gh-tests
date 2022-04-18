@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    "noImplicitAny": false,
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2017", "dom"],
@@ -17,18 +18,14 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@near-wallet-selector/core": ["dist/packages/core"],
-      "@near-wallet-selector/ledger": [
-        "packages/ledger/src/index.ts"
-      ],
+      "@near-wallet-selector/ledger": ["packages/ledger/src/index.ts"],
       "@near-wallet-selector/math-wallet": [
         "packages/math-wallet/src/index.ts"
       ],
       "@near-wallet-selector/near-wallet": [
         "packages/near-wallet/src/index.ts"
       ],
-      "@near-wallet-selector/sender": [
-        "packages/sender/src/index.ts"
-      ],
+      "@near-wallet-selector/sender": ["packages/sender/src/index.ts"],
       "@near-wallet-selector/wallet-connect": [
         "packages/wallet-connect/src/index.ts"
       ]

@@ -5,11 +5,29 @@ on:
 
 jobs:
   release:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Running
-        run: echo 'Running...'
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config user.name "GitHub Bot"
+          git config user.email "gituser@example.com"
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: NPM verification
+        run: npm whoami
+
+      - name: Deploy
+        run: nx run-many --target=deploy --all --exclude=$(ls -p ./examples | grep -v / | tr '\n' ',') --dry-run
 
 # jobs:
 #   release:
@@ -17,14 +35,7 @@ jobs:
 #     runs-on: ubuntu-latest
 
 #     steps:
-#     - name: Checkout
-#       uses: actions/checkout@v2
-#     - name: Setup Node.js
-#       uses: actions/setup-node@v1
-#       with:
-#         node-version: 16.x
-#     - name: Install dependencies
-#       run: yarn install --frozen-lockfile
+
 #     - name: Release
 #       env:
 #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
