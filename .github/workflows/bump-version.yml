@@ -17,20 +17,17 @@ jobs:
           git config user.name "GitHub Bot"
           git config user.email "gituser@example.com"
 
-      - name: Files verification
-        run: echo "$(ls ./examples -p | grep -v / | tr '\n' ',')"
-
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: "16.x"
-      #     cache: 'yarn'
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile --prefer-offline
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
 
 
-      # - name: Deploy
-      #   run: yarn nx run-many --target=deploy --all --exclude=$(ls -p ./examples | grep -v / | tr '\n' ',') --dry-run
+      - name: Deploy
+        run: yarn nx run-many --target=deploy --all --exclude=$(ls ./examples -p | grep -v / | tr '\n' ',') --dry-run
 
 # jobs:
 #   release:
