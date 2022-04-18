@@ -1,7 +1,15 @@
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Running
+        run: echo 'Running...'
 
 # jobs:
 #   release:
